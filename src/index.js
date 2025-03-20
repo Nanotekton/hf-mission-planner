@@ -422,7 +422,7 @@ function turnWeight(u, v) {
   const {node: vId, dir: vDir} = v
   const { points } = mapData
   if (points[vId].type === 'hohmann') {
-    if (uId === vId && uDir != null && vDir == null) return 1
+    if (uId === vId && uDir != null && vDir == null) return 1 + pivotPen
     return 0
   }
   return 0
@@ -508,6 +508,12 @@ function pathWeight(path) {
 let isru = 0
 function setIsru(e) {
   isru = e
+  draw()
+}
+
+let pivotPen = 0
+function setPivotPenalty(e) {
+  pivotPen = e
   draw()
 }
 
@@ -732,5 +738,5 @@ function draw() {
     ctx.restore()
   }
   const weight = pathWeight(highlightedPath)
-  ReactDOM.render(React.createElement(Overlay, {path: highlightedPath, weight, isru, setIsru}), overlay)
+  ReactDOM.render(React.createElement(Overlay, {path: highlightedPath, weight, isru, setIsru, pivotPen, setPivotPenalty}), overlay)
 }

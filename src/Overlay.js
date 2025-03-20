@@ -24,9 +24,19 @@ function VehicleInfo({isru, setIsru}) {
   )
 }
 
-export function Overlay({path, weight, isru, setIsru}) {
+function PivotPenalty({pivotPen, setPivotPenalty}) {
+  return e('div', {className: 'VehicleInfo'},
+    e('div', {className: 'field'},
+      'Pivot Penalty',
+      e('input', {value: pivotPen, type: 'number', min: 0, max: 4, onChange: e => setPivotPenalty(Number(e.target.value))})
+    )
+  )
+}
+
+export function Overlay({path, weight, isru, setIsru, pivotPen, setPivotPenalty}) {
   return [
     PathInfo({path, weight}),
     VehicleInfo({isru, setIsru}),
+    PivotPenalty({pivotPen, setPivotPenalty})
   ]
 }
